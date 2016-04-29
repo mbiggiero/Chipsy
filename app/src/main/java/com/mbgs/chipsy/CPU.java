@@ -105,6 +105,9 @@ public class CPU {
 			case -613156860:
 				this.romName = "Fishie";
 			break;
+			case -307149892:
+				this.romName = "15 Puzzle";
+				break;
 			case -613156864:
 				this.romName = "Car (SuperChip8)";
 				this.chipSpeed = 1.5;
