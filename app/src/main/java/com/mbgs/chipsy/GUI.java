@@ -126,7 +126,7 @@ public class GUI extends SurfaceView{
 		for (int i = 0; i < this.gfxXSize ; i++){
 			for (int j = 0; j < this.gfxYSize ; j++){
 				if (Chipsy.myChipsy8.chipGPU.getFlag()){
-
+//test
 					if (Chipsy.myChipsy8.chipGPU.getPixel(i,j)==1){
 						canvas.drawRect(this.xOffset+this.drawXSize / this.gfxXSize * i * this.UIZoom,
 								this.yOffset+this.drawYSize / this.gfxYSize * j * this.UIZoom,
