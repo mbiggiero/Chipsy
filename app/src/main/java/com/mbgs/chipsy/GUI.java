@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 @SuppressWarnings("serial")
 
@@ -26,21 +27,22 @@ public class GUI extends SurfaceView{
 	private SurfaceHolder surfaceHolder;
 	private int UIZoom = 1;
 	private MyThread myThread;
-	private String name;
+	String name;
 	private Canvas cv;
 	boolean SetUpD;
 	int Width;
 	int Height;
+	Context currentContext;
 
 
-	public GUI(Context context, int chipMode, int zoom, String romm) {
+	public GUI(Context context, int chipMode, int zoom, String rom) {
 		super(context);
 		setWillNotDraw(false);
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 		//context.setOnTouchListener(this);
-
-		this.name = romm;
+		this.currentContext = context;
+		this.name = rom;
 		init();
 		this.SetUpD = false;
 		this.UIZoom = 1;//3;
@@ -56,15 +58,26 @@ public class GUI extends SurfaceView{
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 		Width = this.getMeasuredWidth();
+		//setX(Chipsy.dpToPx(120));
 		Height = Width / 2;
 		Log.d("Chipsy ", Width + " " + Height);
-		setLayoutParams(new android.widget.RelativeLayout.LayoutParams(Width,Height));
+		RelativeLayout.LayoutParams params = new android.widget.RelativeLayout.LayoutParams(Width, Height);
+
+		if (getResources().getConfiguration().orientation==2){
+			setX(Chipsy.dpToPx(120));
+			params.leftMargin=Chipsy.dpToPx(120);
+			params.topMargin =Chipsy.dpToPx(40);}
+
+		setLayoutParams(params);
+
+
+
 		SetUpD = true;
 
 	}
 
-	public GUI(Context context,
-						 AttributeSet attrs) {
+
+	public GUI(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 		this.chipMode = chipMode;

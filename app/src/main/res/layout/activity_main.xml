@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Chipsy">
@@ -24,7 +24,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="CPU Speed"
         android:id="@+id/speedText"
-        android:layout_above="@+id/seekBar"
+        android:layout_below="@+id/viewGUI"
         android:layout_centerHorizontal="true"/>
 
     <com.mbgs.chipsy.GUI
@@ -44,9 +44,11 @@
         android:max="45"
         android:progress="15"
         android:layout_gravity="center"
-        android:layout_below="@id/viewGUI"
+        android:layout_below="@+id/speedText"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/imageButton"
+        android:layout_toStartOf="@+id/imageButton" />
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
@@ -57,7 +59,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/view"
-        android:layout_below="@+id/seekBar">
+        android:layout_below="@+id/imageButton">
 
 
         <Button
@@ -252,4 +254,17 @@
 
 
     </android.support.percent.PercentRelativeLayout>
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageButton"
+        android:src="@drawable/reload"
+        android:scaleType="fitXY"
+        android:background="#00000000"
+        android:layout_below="@+id/viewGUI"
+        android:layout_alignRight="@+id/viewGUI"
+        android:layout_alignEnd="@+id/viewGUI" />
+
+
 </RelativeLayout>

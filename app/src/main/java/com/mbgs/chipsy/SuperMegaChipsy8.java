@@ -75,13 +75,13 @@ public class SuperMegaChipsy8 {
 		//Chipsy.myChipsy8.chipCPU.AutoDetectSettings();
 		chipGPU.ClearScreen();
 		chipRAM.softReset();
-		chipRAM.loadFont();
+		//chipRAM.loadFont();
 		chipKeys.resetInput();
 		//chipRAM.loadAtRAM(0x200,file);
 		chipCPU.Reset();
 		ST.reset();
 		DT.reset();
-
+		Run();
 
 //		Chipsy.drawView.repaint();
 	}
