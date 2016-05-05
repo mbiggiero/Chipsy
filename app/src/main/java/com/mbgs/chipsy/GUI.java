@@ -24,9 +24,10 @@ public class GUI extends SurfaceView{
 	private int xOffset;
 	private int yOffset;
 	private SurfaceHolder surfaceHolder;
+	public Context currentContext;
 	private int UIZoom = 1;
 	private MyThread myThread;
-	private String name;
+	public String name;
 	private Canvas cv;
 	boolean SetUpD;
 	int Width;
@@ -39,6 +40,7 @@ public class GUI extends SurfaceView{
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 		//context.setOnTouchListener(this);
+		currentContext = context;
 
 		this.name = romm;
 		init();
@@ -126,12 +128,18 @@ public class GUI extends SurfaceView{
 		for (int i = 0; i < this.gfxXSize ; i++){
 			for (int j = 0; j < this.gfxYSize ; j++){
 				if (Chipsy.myChipsy8.chipGPU.getFlag()){
+					int multiplier = 1;
+					if (this.chipMode==0){
+						multiplier = 2;
+					}else{
+						multiplier = 1;
+					}
 
 					if (Chipsy.myChipsy8.chipGPU.getPixel(i,j)==1){
-						canvas.drawRect(this.xOffset+this.drawXSize / this.gfxXSize * i * this.UIZoom,
-								this.yOffset+this.drawYSize / this.gfxYSize * j * this.UIZoom,
-								this.xOffset+pixelSize * this.UIZoom+this.drawXSize / this.gfxXSize * i * this.UIZoom,
-								this.yOffset+pixelSize * this.UIZoom+this.drawYSize / this.gfxYSize * j * this.UIZoom,
+						canvas.drawRect(this.xOffset+this.drawXSize / this.gfxXSize * i * this.UIZoom*multiplier,
+								this.yOffset+this.drawYSize / this.gfxYSize * j * this.UIZoom*multiplier,
+								this.xOffset+pixelSize * this.UIZoom+this.drawXSize / this.gfxXSize * i * this.UIZoom*multiplier,
+								this.yOffset+pixelSize * this.UIZoom+this.drawYSize / this.gfxYSize * j * this.UIZoom*multiplier,
 								paint);
 						//canvas.drawRect(this.drawXSize / this.gfxXSize * i, this.drawYSize / this.gfxYSize * j, 10,10, paint);
 						//Log.w("Chipsy", "ram with something");
@@ -147,7 +155,7 @@ public class GUI extends SurfaceView{
 	public void SetupDrawingSurface(int chipMode){
 		//if (SetUpD == false) {//TODO STUPID POINTLESS LOOPS
 
-
+			this.chipMode=chipMode;
 			this.gfxXSize = Chipsy.myChipsy8.chipGPU.getWidth();
 			this.gfxYSize = Chipsy.myChipsy8.chipGPU.getHeight();
 
@@ -156,7 +164,7 @@ public class GUI extends SurfaceView{
 				this.drawYSize = Width/2;//32*6
 				this.xOffset = ((Width/2)%64)/2;//19;
 				this.yOffset = ((Height/2)%32)/2 ;//5;
-				this.pixelSize = Width/64;
+				this.pixelSize = Width/128*2;
 
 			//	Log.d("Choipy", this.drawXSize+" "+this.drawYSize+" "+ this.pixelSize);
 			} else if (chipMode == 1) {
