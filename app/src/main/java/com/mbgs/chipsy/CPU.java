@@ -110,6 +110,7 @@ public class CPU {
 				break;
 			case -613156864:
 				this.romName = "Car (SuperChip8)";
+				//test
 				this.chipSpeed = 1.5;
 				Chipsy.drawView.SetupDrawingSurface(2);
 				break;
@@ -127,12 +128,7 @@ public class CPU {
 		this.isRunning=true;
 		while(j>0){
 			this.opcode=this.Fetch();
-			//Log.v("CHIPSY", "DECODING " + String.format("%x",(short)this.opcode));
 			this.Decode();
-			//TODO only if debugging
-		
-			//TODO move to Timers later
-			//at the end	
 			j-=1;		
 		}
 	}

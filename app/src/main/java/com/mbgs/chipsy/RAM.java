@@ -136,7 +136,7 @@ public class RAM {
 
 	public void softReset() {
 		this.wipeRAM();
-		//this.loadAtRAM(offset, this.currentRom);
+		load2(Chipsy.drawView.currentContext, 0x200, Chipsy.drawView.name);
 
 	}
 

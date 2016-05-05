@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -44,6 +45,7 @@ public class Chipsy extends AppCompatActivity {
     private Button buttonD;
     private Button buttonE;
     private Button buttonF;
+    private ImageButton reload;
     public static int GUIWidth;
     public static int GUIHeight;
     public String romNameMain;
@@ -102,7 +104,7 @@ public class Chipsy extends AppCompatActivity {
         buttonD = (Button) findViewById(R.id.buttonD);
         buttonE = (Button) findViewById(R.id.buttonE);
         buttonF = (Button) findViewById(R.id.buttonF);
-
+        reload = (ImageButton)findViewById(R.id.imageButton);
 
         button0.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -313,12 +315,24 @@ public class Chipsy extends AppCompatActivity {
 
         });
 
+        reload.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN){
+                    myChipsy8.reset();
+                    return false;
+                }
+                return false;
+            }
+        });
+
         sb = (SeekBar)(findViewById(R.id.seekBar));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 0;
 
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                Chipsy.myChipsy8.setCPUSpeed(progress+5);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Chipsy.myChipsy8.setCPUSpeed(progress + 5);
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {
