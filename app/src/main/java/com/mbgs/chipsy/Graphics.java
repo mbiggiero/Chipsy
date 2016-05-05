@@ -1,5 +1,7 @@
 package com.mbgs.chipsy;
 
+import android.util.Log;
+
 public class Graphics {
 	private int width;
 	private int height;
@@ -18,9 +20,10 @@ public class Graphics {
 	}
 
 	public void Initialize(int a) {
+		this.mode=a;
 		if (a==0){
-			this.width = 64;
-			this.height = 32;
+			this.width = 128;
+			this.height = 64;
 		}else
 		if (a==1){
 			this.width = 64;
@@ -36,10 +39,23 @@ public class Graphics {
 	}
 	
 	void setPixel(int x, int y, int a){
+		//Log.d("Chipsy", " test "+ Chipsy.myChipsy8.mode);
 		this.gfx[x][y]=a;
+	///	if (GUI.chipModes==0){
+	//		this.gfx[x+1][y]=a;
+//			this.gfx[x][y+1]=a;
+//			this.gfx[x+1][y+1]=a;
+//		}
+		//this.gfx[x+1][y]=a;
+		//this.gfx[x][y+1]=a;
+		//this.gfx[x+1][y+1]=a;
 	}
 	
 	int getPixel(int x, int y){
+	//	if (GUI.chipModes==0){
+	//		return this.gfx[x*2][y*2];
+	//	}
+	//	else
 		return this.gfx[x][y];
 	}
 	
@@ -95,6 +111,7 @@ public class Graphics {
 				
 			}
 		}else{
+			if (Chipsy.myChipsy8.mode!=2)
 			for (int i = 0; i < this.width; i++){
 				for (int j = this.height-1; j >= 0; j--){
 					if (j<a){

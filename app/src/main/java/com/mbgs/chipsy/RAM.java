@@ -142,7 +142,11 @@ public class RAM {
 
 
 	public short get2Byte(int i) {
-		return (short) ((this.RAM4K[i] << 8) | (this.RAM4K[i + 1]));
+	//	if((i%2==0)) {
+			return (short) ((this.RAM4K[i] << 8) | (this.RAM4K[i + 1]));
+		//}else{
+	//		return (short)  ((this.RAM4K[i] << 8) | (this.RAM4K[i + 1]));
+	//	}
 	}
 
 	public void load2(Context context, int offset, String romNameMain) {

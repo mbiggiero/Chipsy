@@ -405,17 +405,36 @@ public class CPU {
 				break;
 			case 0xD://DONE except warping
 				if(this.op4==0){
+					//Log.d("Chipsy", "dxy0");
 					char x = this.V[op2];
 					char y = this.V[op3];
 					short pixel;
 					this.V[0xF] = 0;
+					int offset=0x8000;
+					int test = 2;
+					int test2= 16;
+					if (Chipsy.myChipsy8.mode==0){
+						offset=0x80;
+						test=1;
+						test2 = 8;
+					}else{
+						offset=0x8000;
+						test=2;
+						test2=16;
+					}
 					
 					  for (char yline = 0; yline < 16; yline++)
 					  {
-					    pixel = Chipsy.myChipsy8.chipRAM.get2Byte(this.I+yline*2);
-					    for(char xline = 0; xline < 16; xline++)
+					    pixel = Chipsy.myChipsy8.chipRAM.get2Byte(this.I+yline*test);
+						  if (Chipsy.myChipsy8.mode==0){
+							  pixel = (short)Chipsy.myChipsy8.chipRAM.getByte(this.I+yline);
+						  }else{
+							  pixel = Chipsy.myChipsy8.chipRAM.get2Byte(this.I+yline*test);
+						  }
+
+					    for(char xline = 0; xline < test2; xline++)
 					    {
-					      if((pixel & (0x8000 >> xline)) != 0){				    	  
+					      if((pixel & (offset >> xline)) != 0){
 					    	if ((x+xline>=0)&&(x+xline<Chipsy.myChipsy8.chipGPU.getWidth())&&(y+yline>=0)&&(y+yline<Chipsy.myChipsy8.chipGPU.getHeight()))	{	      
 					        if(Chipsy.myChipsy8.chipGPU.getPixel((xline+x), (yline+y)) == 1){
 					        	this.V[0xF] = 1;  

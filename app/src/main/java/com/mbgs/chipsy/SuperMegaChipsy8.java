@@ -23,7 +23,7 @@ public class SuperMegaChipsy8 {
 	protected Input chipKeys;
 	protected int CPUSpeed;
 	protected Timer timer;
-	protected int mode;
+	static  protected int mode;
 	protected int previousMode;
 	public boolean hasRom;
 	public boolean isRunning;
@@ -88,6 +88,7 @@ public class SuperMegaChipsy8 {
 		
 	public void Run() {
 		Chipsy.drawView.SetupDrawingSurface(Chipsy.myChipsy8.mode);
+		this.mode=Chipsy.myChipsy8.mode;
 		Chipsy.myChipsy8.chipCPU.AutoDetectSettings();
 		Log.v("Chipsy", "RUNNING");
 		Chipsy.myChipsy8.isRunning=true;
